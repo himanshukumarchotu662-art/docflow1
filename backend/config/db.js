@@ -1,7 +1,7 @@
 // config/db.js
 const mongoose = require('mongoose');
 
-const mongoURI = 'mongodb://localhost:27017/deckflow'; // or from .env
+const mongoURI = 'mongodb+srv://docflow4:codewarrior69@cluster0.jbz4kgu.mongodb.net/?appName=Cluster0'; // or from .env
 
 const connectDB = async () => {
   try {
