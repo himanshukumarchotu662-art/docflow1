@@ -9,14 +9,15 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:5173', 'http://localhost:8080'], // All common frontend ports
+  origin: process.env.FRONTEND_URL ? [process.env.FRONTEND_URL, ...['http://localhost:3000', 'http://localhost:5173', 'http://localhost:8080']] : '*',
   credentials: true
 }));
 app.use(express.json()); // Parse JSON request bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request bodies
 
 // Database connection
-mongoose.connect('mongodb://localhost:27017/deckflow', {
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/deckflow';
+mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
